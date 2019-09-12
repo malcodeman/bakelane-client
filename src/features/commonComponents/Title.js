@@ -9,6 +9,7 @@ const commonStyle = css`
   ${props =>
     props.marginBottom &&
     css`
+      display: inline-block;
       margin-bottom: ${props.marginBottom}rem;
     `};
 `;
