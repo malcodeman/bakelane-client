@@ -2,11 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 import Logo from "../../commonComponents/Logo";
-import SignupForm from "./SignupForm";
+import LoginForm from "./LoginForm";
 
 const Wrapper = styled.div`
   min-height: 100vh;
-  background-color: ${props => `${props.theme.brand}33`};
   @media (min-width: 576px) {
     padding: 2rem;
     display: flex;
@@ -24,7 +23,7 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
-  background-color: #fff;
+  background-color: initial;
   padding: 2rem;
   @media (min-width: 576px) {
     background-color: initial;
@@ -32,11 +31,11 @@ const Header = styled.div`
 `;
 
 const AuthWrapper = styled.div`
-  background-color: #fff;
-  padding: 2rem 2rem 2rem;
+  background-color: initial;
+  padding: 2rem;
 `;
 
-function Signup() {
+function Login() {
   return (
     <Wrapper>
       <Container>
@@ -44,11 +43,11 @@ function Signup() {
           <Logo />
         </Header>
         <AuthWrapper>
-          <SignupForm />
+          <LoginForm />
         </AuthWrapper>
       </Container>
     </Wrapper>
   );
 }
 
-export default Signup;
+export default Login;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Logo from "../../commonComponents/Logo";
 import Tile from "../../commonComponents/Title";
-import Signup from "../../auth/components/Signup";
+import SignupForm from "../../auth/components/SignupForm";
 
 const Grid = styled.div`
   display: grid;
@@ -31,6 +31,13 @@ const Center = styled.div`
   padding: 2rem 0;
 `;
 
+const SignupWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+`;
+
 function Home() {
   return (
     <Grid>
@@ -45,7 +52,9 @@ function Home() {
           </div>
         </Center>
       </Hero>
-      <Signup />
+      <SignupWrapper>
+        <SignupForm />
+      </SignupWrapper>
     </Grid>
   );
 }
