@@ -2,30 +2,33 @@ import {
   SIGNUP_SUCCESS,
   LOGIN_SUCCESS,
   LOGOUT
-} from "../actions/authActionTypes";
+} from "../../auth/actions/authActionTypes";
 
-const initialState = {};
+const initialProfileState = {
+  email: "",
+  username: ""
+};
+
+const initialState = {
+  profile: initialProfileState
+};
 
 export default (state = initialState, action) => {
-  console.log(
-    `%c${action.type}`,
-    "background: #000; color: #22edfc; padding: 4px"
-  );
   switch (action.type) {
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        isAuthorized: true
+        profile: action.payload.user
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
-        isAuthorized: true
+        profile: action.payload.user
       };
     case LOGOUT:
       return {
         ...state,
-        isAuthorized: false
+        profile: initialProfileState
       };
     default:
       return state;
