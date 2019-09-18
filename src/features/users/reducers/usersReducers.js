@@ -18,12 +18,12 @@ export default (state = initialState, action) => {
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        profile: action.payload.user
+        profile: action.payload
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
-        profile: action.payload.user
+        profile: action.payload
       };
     case LOGOUT:
       return {

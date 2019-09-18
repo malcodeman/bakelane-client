@@ -25,12 +25,13 @@ function* signup(action) {
   try {
     const data = yield call(signupApi, action.payload);
     const token = data.data.token;
+    const user = data.data.user;
 
     localStorage.setItem("token", token);
     setSubmitting(false);
-    yield put({ type: SIGNUP_SUCCESS, payload: data.data });
+    yield put({ type: SIGNUP_SUCCESS, payload: user });
   } catch (error) {
-    const exception = error.data.exception;
+    const exception = error.data.message;
 
     switch (exception) {
       case "EmailExistsException":
@@ -60,7 +61,7 @@ function* login(action) {
     setSubmitting(false);
     yield put({ type: LOGIN_SUCCESS, payload: user });
   } catch (error) {
-    const exception = error.data.exception;
+    const exception = error.data.message;
 
     switch (exception) {
       case "UserNotFoundException":
