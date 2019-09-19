@@ -69,6 +69,7 @@ const dark = {
   alert,
   negative,
   primary: "#14171a",
+  secondary: "#8e8e93",
   inputFill: "hsla(0,0%,0%,0.05)"
 };
 const light = {
@@ -80,7 +81,8 @@ const light = {
   borderRadius,
   alert,
   negative,
-  primary: "#0e0d20",
+  primary: "#1c1c1e",
+  secondary: "#8e8e93",
   inputFill: "hsla(0,0%,0%,0.05)"
 };
 
