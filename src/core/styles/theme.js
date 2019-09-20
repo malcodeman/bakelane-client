@@ -49,7 +49,7 @@ const animations = {
     ${bounceIn} 240ms cubic-bezier(0.215, 0.61, 0.355, 1);
   `
 };
-const borderRadius = "0";
+const borderRadius = "3px";
 const positive = "#30d158";
 const negative = "#ff453a";
 const warning = "#ffd60a";
