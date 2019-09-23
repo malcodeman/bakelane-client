@@ -16,7 +16,7 @@ const Grid = styled.div`
 const Hero = styled.div`
   padding: 1rem 2rem;
   display: none;
-  background-color: ${props => `${props.theme.brand}33`};
+  background-color: ${props => props.theme.background};
   @media (min-width: 992px) {
     display: flex;
     flex-direction: column;
@@ -36,6 +36,7 @@ const SignupWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 2rem;
+  background-color: ${props => props.theme.background};
 `;
 
 function Home() {

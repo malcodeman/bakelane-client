@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const StyledText = styled.span`
-  display: inline-block;
   line-height: 1.5;
   font-size: ${props => `${props.size}rem`};
   font-weight: ${props => props.strong && "500"};

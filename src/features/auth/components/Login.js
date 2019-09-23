@@ -6,8 +6,9 @@ import LoginForm from "./LoginForm";
 
 const Wrapper = styled.div`
   min-height: 100vh;
+  padding: 2rem;
+  background-color: ${props => props.theme.background};
   @media (min-width: 576px) {
-    padding: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,29 +23,12 @@ const Container = styled.div`
   }
 `;
 
-const Header = styled.div`
-  background-color: initial;
-  padding: 2rem;
-  @media (min-width: 576px) {
-    background-color: initial;
-  }
-`;
-
-const AuthWrapper = styled.div`
-  background-color: initial;
-  padding: 2rem;
-`;
-
 function Login() {
   return (
     <Wrapper>
       <Container>
-        <Header>
-          <Logo />
-        </Header>
-        <AuthWrapper>
-          <LoginForm />
-        </AuthWrapper>
+        <Logo mb={2} />
+        <LoginForm />
       </Container>
     </Wrapper>
   );

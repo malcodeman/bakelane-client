@@ -6,9 +6,9 @@ import SignupForm from "./SignupForm";
 
 const Wrapper = styled.div`
   min-height: 100vh;
-  background-color: ${props => `${props.theme.brand}33`};
+  padding: 2rem;
+  background-color: ${props => props.theme.background};
   @media (min-width: 576px) {
-    padding: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,29 +23,12 @@ const Container = styled.div`
   }
 `;
 
-const Header = styled.div`
-  background-color: #fff;
-  padding: 2rem;
-  @media (min-width: 576px) {
-    background-color: initial;
-  }
-`;
-
-const AuthWrapper = styled.div`
-  background-color: #fff;
-  padding: 2rem 2rem 2rem;
-`;
-
 function Signup() {
   return (
     <Wrapper>
       <Container>
-        <Header>
-          <Logo />
-        </Header>
-        <AuthWrapper>
-          <SignupForm />
-        </AuthWrapper>
+        <Logo mb={2} />
+        <SignupForm />
       </Container>
     </Wrapper>
   );

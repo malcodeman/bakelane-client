@@ -1,17 +1,20 @@
 import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import styled from "styled-components";
+import styled, { withTheme } from "styled-components";
 import { NavLink } from "react-router-dom";
 
 import Logo from "../../commonComponents/Logo";
 import Popover from "../../commonComponents/Popover";
+import Text from "../../commonComponents/Text";
+import Switch from "../../commonComponents/Switch";
 import PlusIcon from "../../commonAssets/icons/Plus";
 import UserIcon from "../../commonAssets/icons/User";
 import BellIcon from "../../commonAssets/icons/Bell";
 import LogOutIcon from "../../commonAssets/icons/LogOut";
 
 import { logout } from "../../auth/actions/authActionCreators";
+import { toggleDarkMode } from "../../settings/actions/settingsActionCreators";
 
 const StyledHeader = styled.header`
   position: fixed;
@@ -19,7 +22,8 @@ const StyledHeader = styled.header`
   left: 0px;
   right: 0px;
   z-index: 1;
-  box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 0px 0px;
+  box-shadow: ${props => props.theme.shadow} 0px 2px 0px 0px;
+  background-color: ${props => props.theme.headerNavigationFill};
 `;
 
 const Nav = styled.nav`
@@ -49,8 +53,9 @@ const Overlay = styled.div`
   flex-direction: column;
   width: 240px;
   background-color: #fff;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   border-radius: ${props => props.theme.borderRadius};
+  box-shadow: 0 0 0 2px ${props => props.theme.border};
+  background-color: ${props => props.theme.background};
 `;
 
 const EmailWrapper = styled.div`
@@ -60,7 +65,8 @@ const EmailWrapper = styled.div`
 const Email = styled.div`
   font-size: 0.8rem;
   padding: 0.5rem 0;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  color: ${props => props.theme.primary};
+  border-bottom: 2px solid ${props => props.theme.border};
 `;
 
 const Menu = styled.ul`
@@ -77,24 +83,26 @@ const MenuItem = styled.li`
   cursor: pointer;
   color: ${props => props.theme.primary};
   border-radius: ${props => props.theme.borderRadius};
+  justify-content: ${props => props.justifyContent};
   &:hover {
     background-color: ${props => `${props.theme.primary}19`};
   }
 `;
 
-const MenuLabel = styled.span`
-  margin-left: 0.5rem;
-  font-size: 0.8rem;
-`;
-
 function Header(props) {
-  const { profile } = props;
+  const { profile, darkMode, toggleDarkMode, theme } = props;
 
   function handleLogOut() {
     const { logout } = props;
 
     localStorage.removeItem("token");
     logout();
+  }
+
+  function toggleState(callback, currentState) {
+    const newState = currentState ? false : true;
+
+    callback(newState);
   }
 
   return (
@@ -107,7 +115,7 @@ function Header(props) {
           </StyledNavLink>
           <StyledNavLink to="/orders">Orders</StyledNavLink>
         </Grow>
-        <PlusIcon marginRight={1} />
+        <PlusIcon marginRight={1} color={theme.primary} />
         <Popover
           placement="bottom-end"
           overlay={({ close }) => (
@@ -116,20 +124,27 @@ function Header(props) {
                 <Email>{profile.email}</Email>
               </EmailWrapper>
               <Menu>
+                <MenuItem
+                  onClick={() => toggleState(toggleDarkMode, darkMode)}
+                  justifyContent="space-between"
+                >
+                  <Text>Dark mode</Text>
+                  <Switch state={darkMode} />
+                </MenuItem>
                 <MenuItem>
                   <BellIcon />
-                  <MenuLabel>Notification preferences</MenuLabel>
+                  <Text ml={0.5}>Notification preferences</Text>
                 </MenuItem>
                 <MenuItem onClick={handleLogOut}>
                   <LogOutIcon />
-                  <MenuLabel>Log out</MenuLabel>
+                  <Text ml={0.5}>Log out</Text>
                 </MenuItem>
               </Menu>
             </Overlay>
           )}
         >
           <div>
-            <UserIcon />
+            <UserIcon color={theme.primary} />
           </div>
         </Popover>
       </Nav>
@@ -139,13 +154,17 @@ function Header(props) {
 
 const mapStateToProps = state => {
   return {
-    profile: state.users.profile
+    profile: state.users.profile,
+    darkMode: state.settings.darkMode
   };
 };
 
 const withConnect = connect(
   mapStateToProps,
-  { logout }
+  { logout, toggleDarkMode }
 );
 
-export default compose(withConnect)(Header);
+export default compose(
+  withConnect,
+  withTheme
+)(Header);

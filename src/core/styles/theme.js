@@ -63,14 +63,24 @@ const dark = {
   brand,
   underline,
   transitions,
-  button,
+  button: {
+    ...button,
+    disabled: {
+      color: "#757575",
+      background: "#292929"
+    }
+  },
   animations,
   borderRadius,
   alert,
   negative,
-  primary: "#14171a",
+  primary: "#d9d9d9",
   secondary: "#8e8e93",
-  inputFill: "hsla(0,0%,0%,0.05)"
+  inputFill: "#15181c",
+  background: "#000000",
+  headerNavigationFill: "#000000",
+  border: "#2f3336",
+  shadow: "rgba(255, 255, 255, 0.06)"
 };
 const light = {
   brand,
@@ -83,7 +93,11 @@ const light = {
   negative,
   primary: "#1c1c1e",
   secondary: "#8e8e93",
-  inputFill: "hsla(0,0%,0%,0.05)"
+  inputFill: "hsla(0,0%,0%,0.05)",
+  background: "#fcfcfc",
+  headerNavigationFill: "#ffffff",
+  border: "rgba(0, 0, 0, 0.25)",
+  shadow: "rgba(0, 0, 0, 0.03)"
 };
 
 export default {

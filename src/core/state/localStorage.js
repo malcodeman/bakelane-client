@@ -4,6 +4,7 @@ export const loadState = () => {
 
     if (serializedState === null) {
       return {
+        settings: { darkMode: false },
         auth: { isAuthorized: false }
       };
     }

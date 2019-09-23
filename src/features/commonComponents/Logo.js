@@ -12,6 +12,7 @@ const BrandLink = styled(Link)`
   align-items: center;
   margin-left: ${props => props.ml && `${props.ml}rem`};
   margin-right: ${props => props.mr && `${props.mr}rem`};
+  margin-bottom: ${props => props.mb && `${props.mb}rem`};
 `;
 
 const BrandText = styled.span`
@@ -27,10 +28,10 @@ const BrandText = styled.span`
 `;
 
 function Logo(props) {
-  const { to, color, theme, size, ml, mr } = props;
+  const { to, color, theme, size, ml, mr, mb } = props;
 
   return (
-    <BrandLink to={to} ml={ml} mr={mr}>
+    <BrandLink to={to} ml={ml} mr={mr} mb={mb}>
       <LogoIcon color={color || theme.brand} size={size} />
       <BrandText>{NAME}</BrandText>
     </BrandLink>
@@ -42,14 +43,16 @@ Logo.propTypes = {
   color: PropTypes.string,
   size: PropTypes.number,
   ml: PropTypes.number,
-  mr: PropTypes.number
+  mr: PropTypes.number,
+  mb: PropTypes.number
 };
 
 Logo.defaultProps = {
   to: "/",
   size: 16,
   ml: 0,
-  mr: 0
+  mr: 0,
+  mb: 0
 };
 
 export default compose(withTheme)(Logo);

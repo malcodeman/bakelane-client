@@ -14,10 +14,10 @@ import Login from "./features/auth/components/Login";
 import Orders from "./features/orders/components/Orders";
 
 function App(props) {
-  const { isAuthorized } = props;
+  const { isAuthorized, darkMode } = props;
 
   return (
-    <ThemeProvider theme={theme.light}>
+    <ThemeProvider theme={darkMode ? theme.dark : theme.light}>
       <Router history={history}>
         <Route exact path="/" component={isAuthorized ? Dashboard : Home} />
         <Route path="/signup" component={Signup} />
@@ -34,7 +34,8 @@ function App(props) {
 
 const mapStateToProps = state => {
   return {
-    isAuthorized: state.auth.isAuthorized
+    isAuthorized: state.auth.isAuthorized,
+    darkMode: state.settings.darkMode
   };
 };
 
