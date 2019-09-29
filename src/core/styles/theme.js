@@ -80,7 +80,8 @@ const dark = {
   background: "#000000",
   headerNavigationFill: "#000000",
   border: "#2f3336",
-  shadow: "rgba(255, 255, 255, 0.06)"
+  shadow: "rgba(255, 255, 255, 0.06)",
+  tableHeadBackgroundColor: "#15181c"
 };
 const light = {
   brand,
@@ -97,7 +98,8 @@ const light = {
   background: "#fcfcfc",
   headerNavigationFill: "#ffffff",
   border: "rgba(0, 0, 0, 0.25)",
-  shadow: "rgba(0, 0, 0, 0.03)"
+  shadow: "rgba(0, 0, 0, 0.03)",
+  tableHeadBackgroundColor: "hsla(0,0%,0%,0.05)"
 };
 
 export default {

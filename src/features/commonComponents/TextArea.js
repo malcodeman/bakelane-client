@@ -2,63 +2,64 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const StyledInput = styled.input`
+const StyledTextArea = styled.textarea`
   font-size: 1rem;
   border: 2px solid transparent;
   padding: 0.5rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
   width: 100%;
   line-height: 1.5;
+  font-family: Roboto;
+  resize: ${props => props.resize};
   color: ${props => props.theme.primary};
   border-radius: ${props => props.theme.borderRadius};
-  transition: ${props => props.theme.transitions.easeIn};
   background-color: ${props => props.theme.inputFill};
+  transition: ${props => props.theme.transitions.easeIn};
   &:focus {
     border-color: ${props => props.theme.border};
   }
 `;
 
-function Input(props) {
+function TextArea(props) {
   const {
     name,
     disabled,
     placeholder,
-    type,
     onChange,
     onBlur,
     value,
-    children
+    resize,
+    readOnly
   } = props;
 
   return (
-    <StyledInput
+    <StyledTextArea
       name={name}
       disabled={disabled}
       placeholder={placeholder}
-      type={type}
       onChange={onChange}
       onBlur={onBlur}
       value={value}
-    >
-      {children}
-    </StyledInput>
+      resize={resize}
+      readonly={readOnly}
+    ></StyledTextArea>
   );
 }
 
-Input.propTypes = {
+TextArea.propTypes = {
   name: PropTypes.string,
   disabled: PropTypes.bool,
   placeholder: PropTypes.string,
-  type: PropTypes.oneOf(["text", "email", "password"]),
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
-  value: PropTypes.string
+  value: PropTypes.string,
+  resize: PropTypes.string,
+  readOnly: PropTypes.bool
 };
 
-Input.defaultProps = {
+TextArea.defaultProps = {
   disabled: false,
-  type: "text"
+  resize: "none",
+  readonly: "true"
 };
 
-export default Input;
+export default TextArea;

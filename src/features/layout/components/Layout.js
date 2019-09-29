@@ -9,7 +9,7 @@ const Main = styled.main`
 
 const Container = styled.div`
   max-width: 1200px;
-  padding: 0 2rem;
+  padding: 2rem;
   margin: 0 auto;
 `;
 

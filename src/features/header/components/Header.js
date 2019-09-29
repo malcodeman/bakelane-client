@@ -2,7 +2,7 @@ import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import styled, { withTheme } from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 import Logo from "../../commonComponents/Logo";
 import Popover from "../../commonComponents/Popover";
@@ -115,7 +115,27 @@ function Header(props) {
           </StyledNavLink>
           <StyledNavLink to="/orders">Orders</StyledNavLink>
         </Grow>
-        <PlusIcon marginRight={1} color={theme.primary} />
+        <Popover
+          placement="bottom-end"
+          overlay={({ close }) => (
+            <Overlay>
+              <Menu>
+                <Link to="/submit">
+                  <MenuItem onClick={close}>
+                    <Text>New donation</Text>
+                  </MenuItem>
+                </Link>
+                <MenuItem onClick={close}>
+                  <Text>New donee</Text>
+                </MenuItem>
+              </Menu>
+            </Overlay>
+          )}
+        >
+          <div>
+            <PlusIcon marginRight={1} color={theme.primary} />
+          </div>
+        </Popover>
         <Popover
           placement="bottom-end"
           overlay={({ close }) => (
