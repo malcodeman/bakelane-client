@@ -15,6 +15,8 @@ const Wrapper = styled.div`
   padding-top: ${props => props.paddingTop && `${props.paddingTop}rem`};
   padding-bottom: ${props =>
     props.paddingBottom && `${props.paddingBottom}rem`};
+  margin-left: ${props => props.marginLeft && `${props.marginLeft}rem`};
+  margin-right: ${props => props.marginRight && `${props.marginRight}rem`};
   ${props =>
     props.spinning
       ? css`
@@ -60,12 +62,23 @@ const Tip = styled.span`
 `;
 
 function Spin(props) {
-  const { spinning, size, paddingTop, paddingBottom, tip, color } = props;
+  const {
+    spinning,
+    size,
+    paddingTop,
+    paddingBottom,
+    marginLeft,
+    marginRight,
+    tip,
+    color
+  } = props;
 
   return (
     <Wrapper
       paddingTop={paddingTop}
       paddingBottom={paddingBottom}
+      marginLeft={marginLeft}
+      marginRight={marginRight}
       spinning={spinning}
     >
       <StyledSpin size={size} color={color} />
@@ -80,6 +93,8 @@ Spin.propTypes = {
   spinning: PropTypes.bool,
   paddingTop: PropTypes.number,
   paddingBottom: PropTypes.number,
+  marginLeft: PropTypes.number,
+  marginRight: PropTypes.number,
   color: PropTypes.string
 };
 
@@ -89,6 +104,8 @@ Spin.defaultProps = {
   spinning: true,
   paddingTop: 0,
   paddingBottom: 0,
+  marginLeft: 0,
+  marginRight: 0,
   color: "currentColor"
 };
 

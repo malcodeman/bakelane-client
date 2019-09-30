@@ -78,7 +78,7 @@ function Button(props) {
         mb={mb}
         block={block}
       >
-        {loading && <Spin />}
+        {loading && <Spin marginRight={0.5} />}
         {icon && !loading && handleIcon(icon)}
         {children}
       </Link>
@@ -94,7 +94,7 @@ function Button(props) {
       mb={mb}
       block={block}
     >
-      {loading && <Spin />}
+      {loading && <Spin marginRight={0.5} />}
       {icon && !loading && handleIcon(icon)}
       {children}
     </StyledButton>
