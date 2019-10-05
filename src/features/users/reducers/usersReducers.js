@@ -3,14 +3,15 @@ import {
   LOGIN_SUCCESS,
   LOGOUT
 } from "../../auth/actions/authActionTypes";
+import { GET_MYSELF_SUCCESS } from "../actions/usersActionTypes";
 
-const initialProfileState = {
+const initialMyselfState = {
   email: "",
   username: ""
 };
 
 const initialState = {
-  profile: initialProfileState
+  myself: initialMyselfState
 };
 
 export default (state = initialState, action) => {
@@ -23,12 +24,17 @@ export default (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        profile: action.payload
+        myself: action.payload
       };
     case LOGOUT:
       return {
         ...state,
-        profile: initialProfileState
+        myself: initialMyselfState
+      };
+    case GET_MYSELF_SUCCESS:
+      return {
+        ...state,
+        myself: action.payload
       };
     default:
       return state;

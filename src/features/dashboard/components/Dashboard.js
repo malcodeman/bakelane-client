@@ -6,19 +6,19 @@ import Header from "../../header/components/Header";
 import Layout from "../../layout/components/Layout";
 
 function Dashboard(props) {
-  const { profile } = props;
+  const { myself } = props;
 
   return (
     <>
       <Header />
-      <Layout>Dashboard, email:{profile.email}</Layout>
+      <Layout>Dashboard, email:{myself.email}</Layout>
     </>
   );
 }
 
 const mapStateToProps = state => {
   return {
-    profile: state.users.profile
+    myself: state.users.myself
   };
 };
 

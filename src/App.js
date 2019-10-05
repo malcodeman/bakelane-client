@@ -13,6 +13,7 @@ import Signup from "./features/auth/components/Signup";
 import Login from "./features/auth/components/Login";
 import Orders from "./features/orders/components/Orders";
 import NewOrder from "./features/orders/components/NewOrder";
+import Account from "./features/account/components/Account";
 
 function App(props) {
   const { isAuthorized, darkMode } = props;
@@ -32,6 +33,11 @@ function App(props) {
           path="/submit"
           isAuthorized={isAuthorized}
           component={NewOrder}
+        />
+        <PrivateRoute
+          path="/account"
+          isAuthorized={isAuthorized}
+          component={Account}
         />
       </Router>
     </ThemeProvider>

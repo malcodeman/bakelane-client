@@ -90,7 +90,7 @@ const MenuItem = styled.li`
 `;
 
 function Header(props) {
-  const { profile, darkMode, toggleDarkMode, theme } = props;
+  const { myself, darkMode, toggleDarkMode, theme } = props;
 
   function handleLogOut() {
     const { logout } = props;
@@ -141,7 +141,7 @@ function Header(props) {
           overlay={({ close }) => (
             <Overlay>
               <EmailWrapper>
-                <Email>{profile.email}</Email>
+                <Email>{myself.email}</Email>
               </EmailWrapper>
               <Menu>
                 <MenuItem
@@ -151,6 +151,12 @@ function Header(props) {
                   <Text>Dark mode</Text>
                   <Switch state={darkMode} />
                 </MenuItem>
+                <Link to="/account">
+                  <MenuItem>
+                    <UserIcon />
+                    <Text ml={0.5}>Account</Text>
+                  </MenuItem>
+                </Link>
                 <MenuItem>
                   <BellIcon />
                   <Text ml={0.5}>Notification preferences</Text>
@@ -174,7 +180,7 @@ function Header(props) {
 
 const mapStateToProps = state => {
   return {
-    profile: state.users.profile,
+    myself: state.users.myself,
     darkMode: state.settings.darkMode
   };
 };
