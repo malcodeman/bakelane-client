@@ -18,7 +18,7 @@ const StyledText = styled.span`
     props.color ||
     props.theme.primary};
   border-bottom: ${props =>
-    props.underline && `2px solid ${props.color || props.theme.borderColor}`};
+    props.underline && `2px solid ${props.color || props.theme.border}`};
   letter-spacing: ${props => props.letterSpacing && `${props.letterSpacing}em`};
   &:hover {
     border-color: currentColor;

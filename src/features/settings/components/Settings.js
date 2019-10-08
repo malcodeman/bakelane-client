@@ -4,12 +4,14 @@ import { connect } from "react-redux";
 
 import Header from "../../header/components/Header";
 import Layout from "../../layout/components/Layout";
-import Text from "../../commonComponents/Text";
+import Setting from "./Setting";
 
 import { getMyself } from "../../users/actions/usersActionCreators";
 
-function Account(props) {
-  const { myself, getMyself } = props;
+import { ACCOUNT } from "../constants/settingsConstants";
+
+function Settings(props) {
+  const { getMyself } = props;
 
   useEffect(() => {
     getMyself();
@@ -19,8 +21,11 @@ function Account(props) {
     <>
       <Header />
       <Layout>
-        <Text>Email: {myself.email}</Text>
-        <Text>Username: {myself.username}</Text>
+        {ACCOUNT.map(setting => {
+          return (
+            <Setting key={setting.id} label={setting.label} url={setting.url} />
+          );
+        })}
       </Layout>
     </>
   );
@@ -37,4 +42,4 @@ const withConnect = connect(
   { getMyself }
 );
 
-export default compose(withConnect)(Account);
+export default compose(withConnect)(Settings);

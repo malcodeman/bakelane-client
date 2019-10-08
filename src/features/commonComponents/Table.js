@@ -12,7 +12,7 @@ const TableHead = styled.th`
   text-align: left;
   font-size: 0.8rem;
   color: ${props => props.theme.primary};
-  border-bottom: 1px solid ${props => props.theme.borderColor};
+  border-bottom: 1px solid ${props => props.theme.border};
   background-color: ${props => props.theme.tableHeadBackgroundColor};
   &:first-of-type {
     border-top-left-radius: ${props => props.theme.borderRadius};
@@ -27,7 +27,7 @@ const TableData = styled.td`
   text-align: left;
   font-size: 0.8rem;
   color: ${props => props.theme.primary};
-  border-bottom: 1px solid ${props => props.theme.borderColor};
+  border-bottom: 1px solid ${props => props.theme.border};
 `;
 
 function Table(props) {

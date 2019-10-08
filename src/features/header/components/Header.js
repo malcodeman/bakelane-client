@@ -12,6 +12,7 @@ import PlusIcon from "../../commonAssets/icons/Plus";
 import UserIcon from "../../commonAssets/icons/User";
 import BellIcon from "../../commonAssets/icons/Bell";
 import LogOutIcon from "../../commonAssets/icons/LogOut";
+import SettingsIcon from "../../commonAssets/icons/Settings";
 
 import { logout } from "../../auth/actions/authActionCreators";
 import { toggleDarkMode } from "../../settings/actions/settingsActionCreators";
@@ -151,10 +152,10 @@ function Header(props) {
                   <Text>Dark mode</Text>
                   <Switch state={darkMode} />
                 </MenuItem>
-                <Link to="/account">
+                <Link to="/settings">
                   <MenuItem>
-                    <UserIcon />
-                    <Text ml={0.5}>Account</Text>
+                    <SettingsIcon />
+                    <Text ml={0.5}>Settings</Text>
                   </MenuItem>
                 </Link>
                 <MenuItem>
