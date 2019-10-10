@@ -46,7 +46,26 @@ export const ACCOUNT = [
   }
 ];
 
+export const NOTIFICATIONS = [
+  {
+    id: nanoid(),
+    label: "Push notifications",
+    url: "/settings/push_notifications"
+  },
+  {
+    id: nanoid(),
+    label: "SMS notifications",
+    url: "/settings/sms_notifications"
+  },
+  {
+    id: nanoid(),
+    label: "Email notifications",
+    url: "/settings/email_notifications"
+  }
+];
+
 export default {
   SETTINGS,
-  ACCOUNT
+  ACCOUNT,
+  NOTIFICATIONS
 };
