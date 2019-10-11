@@ -31,20 +31,25 @@ function* signup(action) {
     setSubmitting(false);
     yield put({ type: SIGNUP_SUCCESS, payload: user });
   } catch (error) {
-    const exception = error.data.message;
+    if (error && error.data) {
+      const { message } = error.data;
 
-    switch (exception) {
-      case "EmailExistsException":
-        setFieldError("email", "Email has already been taken.");
-        break;
-      case "UsernameExistsException":
-        setFieldError("username", "Username has already been taken.");
-        break;
-      default:
-        setFieldError("general", "Something went wrong");
+      switch (message) {
+        case "EmailExistsException":
+          setFieldError("email", "Email has already been taken.");
+          break;
+        case "UsernameExistsException":
+          setFieldError("username", "Username has already been taken.");
+          break;
+        default:
+          setFieldError("general", "Something went wrong");
+      }
+    } else {
+      setFieldError("general", "No response from server");
     }
-    setSubmitting(false);
     yield put({ type: SIGNUP_FAILURE, error });
+  } finally {
+    setSubmitting(false);
   }
 }
 
@@ -61,21 +66,26 @@ function* login(action) {
     setSubmitting(false);
     yield put({ type: LOGIN_SUCCESS, payload: user });
   } catch (error) {
-    const exception = error.data.message;
+    if (error && error.data) {
+      const { message } = error.data;
 
-    switch (exception) {
-      case "UserNotFoundException":
-      case "NotAuthorizedException":
-        setFieldError(
-          "general",
-          "The email and password you entered did not match our records. Please double-check and try again."
-        );
-        break;
-      default:
-        setFieldError("general", "Something went wrong");
+      switch (message) {
+        case "UserNotFoundException":
+        case "NotAuthorizedException":
+          setFieldError(
+            "general",
+            "The email and password you entered did not match our records. Please double-check and try again."
+          );
+          break;
+        default:
+          setFieldError("general", "Something went wrong");
+      }
+    } else {
+      setFieldError("general", "No response from server");
     }
-    setSubmitting(false);
     yield put({ type: LOGIN_FAILURE, error });
+  } finally {
+    setSubmitting(false);
   }
 }
 

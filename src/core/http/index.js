@@ -22,13 +22,16 @@ instance.interceptors.response.use(
     return response;
   },
   error => {
-    const { statusCode } = error.response.data;
+    if (error && error.response) {
+      const { statusCode } = error.response.data;
 
-    if (statusCode === 401) {
-      localStorage.removeItem("token");
-      store.dispatch(logout());
+      if (statusCode === 401) {
+        localStorage.removeItem("token");
+        store.dispatch(logout());
+      }
+      return Promise.reject(error.response);
     }
-    return Promise.reject(error.response);
+    return Promise.reject(error);
   }
 );
 
