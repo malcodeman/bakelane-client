@@ -4,6 +4,10 @@ import {
   LOGOUT
 } from "../../auth/actions/authActionTypes";
 import { GET_MYSELF_SUCCESS } from "../actions/usersActionTypes";
+import {
+  UPDATE_EMAIL_SUCCESS,
+  UPDATE_USERNAME_SUCCESS
+} from "../../settings/actions/settingsActionTypes";
 
 const initialMyselfState = {
   email: "",
@@ -35,6 +39,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         myself: action.payload
+      };
+    case UPDATE_EMAIL_SUCCESS:
+      return {
+        ...state,
+        myself: { ...state.myself, email: action.payload }
+      };
+    case UPDATE_USERNAME_SUCCESS:
+      return {
+        ...state,
+        myself: { ...state.myself, username: action.payload }
       };
     default:
       return state;

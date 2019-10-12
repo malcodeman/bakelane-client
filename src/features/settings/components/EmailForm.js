@@ -10,6 +10,8 @@ import Input from "../../commonComponents/Input";
 import FormItem from "../../commonComponents/FormItem";
 import Alert from "../../commonComponents/Alert";
 
+import { updateEmail } from "../actions/settingsActionCreators";
+
 const FormWrapper = styled.div`
   padding: 0.5rem 1rem;
 `;
@@ -21,7 +23,8 @@ const FormikForm = props => {
     touched,
     isSubmitting,
     handleChange,
-    handleBlur
+    handleBlur,
+    email
   } = props;
 
   return (
@@ -44,7 +47,7 @@ const FormikForm = props => {
           <Button
             type="primary"
             htmlType="submit"
-            disabled={Boolean(isSubmitting)}
+            disabled={Boolean(isSubmitting || values.email === email)}
             loading={isSubmitting}
             mb={1}
           >
@@ -74,12 +77,17 @@ const EmailForm = withFormik({
   mapPropsToValues: props => ({
     email: props.email || ""
   }),
-  handleSubmit(payload, bag) {}
+  handleSubmit(payload, bag) {
+    bag.props.updateEmail(payload, {
+      setSubmitting: bag.setSubmitting,
+      setFieldError: bag.setFieldError
+    });
+  }
 })(FormikForm);
 
 const withConnect = connect(
   null,
-  null
+  { updateEmail }
 );
 
 export default compose(withConnect)(EmailForm);

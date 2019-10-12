@@ -10,6 +10,8 @@ import Input from "../../commonComponents/Input";
 import FormItem from "../../commonComponents/FormItem";
 import Alert from "../../commonComponents/Alert";
 
+import { updateUsername } from "../actions/settingsActionCreators";
+
 const FormWrapper = styled.div`
   padding: 0.5rem 1rem;
 `;
@@ -21,7 +23,8 @@ const FormikForm = props => {
     touched,
     isSubmitting,
     handleChange,
-    handleBlur
+    handleBlur,
+    username
   } = props;
 
   return (
@@ -45,7 +48,7 @@ const FormikForm = props => {
           <Button
             type="primary"
             htmlType="submit"
-            disabled={Boolean(isSubmitting)}
+            disabled={Boolean(isSubmitting || values.username === username)}
             loading={isSubmitting}
             mb={1}
           >
@@ -73,12 +76,17 @@ const UsernameForm = withFormik({
   mapPropsToValues: props => ({
     username: props.username || ""
   }),
-  handleSubmit(payload, bag) {}
+  handleSubmit(payload, bag) {
+    bag.props.updateUsername(payload, {
+      setSubmitting: bag.setSubmitting,
+      setFieldError: bag.setFieldError
+    });
+  }
 })(FormikForm);
 
 const withConnect = connect(
   null,
-  null
+  { updateUsername }
 );
 
 export default compose(withConnect)(UsernameForm);

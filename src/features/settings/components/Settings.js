@@ -18,6 +18,7 @@ import {
 import UsernameForm from "./UsernameForm";
 import EmailForm from "./EmailForm";
 import SettingHeader from "./SettingHeader";
+import PasswordForm from "./PasswordForm";
 
 function Settings(props) {
   const { getMyself, myself } = props;
@@ -109,6 +110,9 @@ function Settings(props) {
         </Route>
         <Route path="/settings/email">
           <EmailForm email={myself.email} />
+        </Route>
+        <Route path="/settings/password">
+          <PasswordForm />
         </Route>
         <Route path="/settings/notifications">
           {NOTIFICATIONS.map(setting => {

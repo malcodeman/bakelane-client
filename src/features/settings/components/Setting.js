@@ -11,7 +11,7 @@ const StyledSetting = styled(NavLink)`
   align-items: center;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  height: 48px;
+  min-height: 48px;
   transition: ${props => props.theme.transitions.easeIn};
   border-bottom: 1px solid ${props => props.theme.border};
   &:hover {

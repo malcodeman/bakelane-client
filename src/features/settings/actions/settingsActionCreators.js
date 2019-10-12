@@ -1,4 +1,8 @@
-import { TOGGLE_DARK_MODE } from "./settingsActionTypes";
+import {
+  TOGGLE_DARK_MODE,
+  UPDATE_EMAIL_REQUEST,
+  UPDATE_USERNAME_REQUEST
+} from "./settingsActionTypes";
 
 export const toggleDarkMode = payload => {
   return {
@@ -6,3 +10,19 @@ export const toggleDarkMode = payload => {
     type: TOGGLE_DARK_MODE
   };
 };
+
+export function updateEmail(payload, meta) {
+  return {
+    type: UPDATE_EMAIL_REQUEST,
+    payload,
+    meta
+  };
+}
+
+export function updateUsername(payload, meta) {
+  return {
+    type: UPDATE_USERNAME_REQUEST,
+    payload,
+    meta
+  };
+}
