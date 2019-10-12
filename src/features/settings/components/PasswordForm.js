@@ -10,6 +10,8 @@ import Input from "../../commonComponents/Input";
 import FormItem from "../../commonComponents/FormItem";
 import Alert from "../../commonComponents/Alert";
 
+import { updatePassword } from "../actions/settingsActionCreators";
+
 const FormWrapper = styled.div`
   padding: 0.5rem 1rem;
 `;
@@ -109,19 +111,25 @@ const PasswordForm = withFormik({
       .min(6, "Password must be at least 6 characters"),
     confirmPassword: Yup.string()
       .required("Confirm password is required")
-      .min(6, "Password must be at least 6 characters")
+      .oneOf([Yup.ref("newPassword"), null], "Passwords do not match")
   }),
   mapPropsToValues: props => ({
-    currentPassword: props.currentPassword || "",
-    newPassword: props.newPassword || "",
-    confirmPassword: props.confirmPassword || ""
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: ""
   }),
-  handleSubmit(payload, bag) {}
+  handleSubmit(payload, bag) {
+    bag.props.updatePassword(payload, {
+      resetForm: bag.resetForm,
+      setSubmitting: bag.setSubmitting,
+      setFieldError: bag.setFieldError
+    });
+  }
 })(FormikForm);
 
 const withConnect = connect(
   null,
-  null
+  { updatePassword }
 );
 
 export default compose(withConnect)(PasswordForm);

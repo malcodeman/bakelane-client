@@ -7,7 +7,10 @@ import {
   UPDATE_EMAIL_SUCCESS,
   UPDATE_USERNAME_REQUEST,
   UPDATE_USERNAME_FAILURE,
-  UPDATE_USERNAME_SUCCESS
+  UPDATE_USERNAME_SUCCESS,
+  UPDATE_PASSWORD_REQUEST,
+  UPDATE_PASSWORD_FAILURE,
+  UPDATE_PASSWORD_SUCCESS
 } from "../actions/settingsActionTypes";
 
 function updateEmailApi(email) {
@@ -16,6 +19,10 @@ function updateEmailApi(email) {
 
 function updateUsernameApi(username) {
   return axios.put("/myself/updateUsername", username);
+}
+
+function updatePasswordApi(data) {
+  return axios.put("/myself/updatePassword", data);
 }
 
 function* updateEmail(action) {
@@ -76,9 +83,44 @@ function* updateUsername(action) {
   }
 }
 
+function* updatePassword(action) {
+  try {
+    const { resetForm } = action.meta;
+
+    yield call(updatePasswordApi, action.payload);
+    yield put({ type: UPDATE_PASSWORD_SUCCESS });
+    resetForm();
+  } catch (error) {
+    const { setFieldError } = action.meta;
+
+    if (error && error.data) {
+      const { message } = error.data;
+
+      switch (message) {
+        case "NotAuthorizedException":
+          setFieldError("currentPassword", "Incorrect password.");
+          break;
+        case "PasswordsNotMatchingException":
+          setFieldError("confirmPassword", "Passwords do not match.");
+          break;
+        default:
+          setFieldError("general", "Something went wrong");
+      }
+    } else {
+      setFieldError("general", "No response from server");
+    }
+    yield put({ type: UPDATE_PASSWORD_FAILURE, error });
+  } finally {
+    const { setSubmitting } = action.meta;
+
+    setSubmitting(false);
+  }
+}
+
 const saga = function*() {
   yield takeLatest(UPDATE_EMAIL_REQUEST, updateEmail);
   yield takeLatest(UPDATE_USERNAME_REQUEST, updateUsername);
+  yield takeLatest(UPDATE_PASSWORD_REQUEST, updatePassword);
 };
 
 export default saga;
