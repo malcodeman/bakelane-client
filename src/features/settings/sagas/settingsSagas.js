@@ -26,15 +26,16 @@ function updatePasswordApi(data) {
 }
 
 function* updateEmail(action) {
-  const { setSubmitting } = action.meta;
-  const { setFieldError } = action.meta;
-
   try {
+    const { setStatus } = action.meta;
     const data = yield call(updateEmailApi, action.payload);
     const { email } = data.data;
 
     yield put({ type: UPDATE_EMAIL_SUCCESS, payload: email });
+    setStatus({ message: "Email updated" });
   } catch (error) {
+    const { setFieldError } = action.meta;
+
     if (error && error.data) {
       const { message } = error.data;
 
@@ -50,20 +51,23 @@ function* updateEmail(action) {
     }
     yield put({ type: UPDATE_EMAIL_FAILURE, error });
   } finally {
+    const { setSubmitting } = action.meta;
+
     setSubmitting(false);
   }
 }
 
 function* updateUsername(action) {
-  const { setSubmitting } = action.meta;
-  const { setFieldError } = action.meta;
-
   try {
+    const { setStatus } = action.meta;
     const data = yield call(updateUsernameApi, action.payload);
     const { username } = data.data;
 
     yield put({ type: UPDATE_USERNAME_SUCCESS, payload: username });
+    setStatus({ message: "Username updated" });
   } catch (error) {
+    const { setFieldError } = action.meta;
+
     if (error && error.data) {
       const { message } = error.data;
 
@@ -79,17 +83,20 @@ function* updateUsername(action) {
     }
     yield put({ type: UPDATE_USERNAME_FAILURE, error });
   } finally {
+    const { setSubmitting } = action.meta;
+
     setSubmitting(false);
   }
 }
 
 function* updatePassword(action) {
   try {
-    const { resetForm } = action.meta;
+    const { resetForm, setStatus } = action.meta;
 
     yield call(updatePasswordApi, action.payload);
     yield put({ type: UPDATE_PASSWORD_SUCCESS });
     resetForm();
+    setStatus({ message: "Password updated" });
   } catch (error) {
     const { setFieldError } = action.meta;
 

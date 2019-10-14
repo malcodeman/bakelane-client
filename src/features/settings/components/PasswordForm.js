@@ -23,7 +23,8 @@ const FormikForm = props => {
     touched,
     isSubmitting,
     handleChange,
-    handleBlur
+    handleBlur,
+    status
   } = props;
 
   return (
@@ -87,13 +88,9 @@ const FormikForm = props => {
             Save
           </Button>
           {errors.general && (
-            <Alert
-              type="error"
-              message={errors.general}
-              marginBottom={1}
-              closable
-            />
+            <Alert type="error" message={errors.general} closable />
           )}
+          {status && <Alert type="success" message={status.message} closable />}
         </Form>
       </FormWrapper>
     </>
@@ -122,7 +119,8 @@ const PasswordForm = withFormik({
     bag.props.updatePassword(payload, {
       resetForm: bag.resetForm,
       setSubmitting: bag.setSubmitting,
-      setFieldError: bag.setFieldError
+      setFieldError: bag.setFieldError,
+      setStatus: bag.setStatus
     });
   }
 })(FormikForm);

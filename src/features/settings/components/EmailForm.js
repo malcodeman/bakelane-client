@@ -24,6 +24,7 @@ const FormikForm = props => {
     isSubmitting,
     handleChange,
     handleBlur,
+    status,
     email
   } = props;
 
@@ -54,13 +55,9 @@ const FormikForm = props => {
             Save
           </Button>
           {errors.general && (
-            <Alert
-              type="error"
-              message={errors.general}
-              marginBottom={1}
-              closable
-            />
+            <Alert type="error" message={errors.general} closable />
           )}
+          {status && <Alert type="success" message={status.message} closable />}
         </Form>
       </FormWrapper>
     </>
@@ -80,7 +77,8 @@ const EmailForm = withFormik({
   handleSubmit(payload, bag) {
     bag.props.updateEmail(payload, {
       setSubmitting: bag.setSubmitting,
-      setFieldError: bag.setFieldError
+      setFieldError: bag.setFieldError,
+      setStatus: bag.setStatus
     });
   }
 })(FormikForm);
