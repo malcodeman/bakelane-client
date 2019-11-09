@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
+import { formatDistanceToNow, parseISO } from "date-fns";
 
 import Header from "../../header/components/Header";
 import Layout from "../../layout/components/Layout";
@@ -26,9 +27,10 @@ function Orders(props) {
       dataIndex: "user.username"
     },
     {
-      title: "Created at",
+      title: "Created",
       key: "created",
-      dataIndex: "createdAt"
+      dataIndex: "createdAt",
+      render: data => `${formatDistanceToNow(parseISO(data.createdAt))} ago`
     }
   ];
 

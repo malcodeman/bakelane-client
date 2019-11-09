@@ -5,6 +5,7 @@ import styled from "styled-components";
 const StyledTable = styled.table`
   width: 100%;
   border-spacing: 0;
+  table-layout: fixed;
 `;
 
 const TableHead = styled.th`
@@ -47,6 +48,13 @@ function Table(props) {
           return (
             <tr key={data.id}>
               {columns.map(column => {
+                if (column && column.render) {
+                  return (
+                    <TableData key={column.dataIndex}>
+                      {column && column.render(data)}
+                    </TableData>
+                  );
+                }
                 return (
                   <TableData key={column.dataIndex}>
                     {data[column.dataIndex]}
